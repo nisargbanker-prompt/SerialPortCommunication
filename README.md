@@ -30,25 +30,6 @@ Add permission in your manifest file and intent filter which activity want to co
     android:resource="@xml/device_filter" />
 ```
 
-Create device_filter.xml in your res folder in xml directory.
-```java
-<resources>
-	<usb-device vendor-id="1118" product-id="688"></usb-device>  
-	<usb-device vendor-id="1027" product-id="24577" /> <!-- FT232RL -->
-	<usb-device vendor-id="1027" product-id="24596" /> <!-- FT232H -->
-	<usb-device vendor-id="1027" product-id="24592" /> <!-- FT2232C/D/HL -->
-	<usb-device vendor-id="1027" product-id="24593" /> <!-- FT4232HL -->
-	<usb-device vendor-id="1027" product-id="24597" /> <!-- FT230X -->
-	<usb-device vendor-id="1412" product-id="45088" /> <!-- REX-USB60F -->
-	<usb-device vendor-id="1027" product-id="24641" /> <!-- FT4233HPQ -->
-	<usb-device vendor-id="1027" product-id="24643" /> <!-- FT4232HPQ -->
-	<usb-device vendor-id="1027" product-id="24640" /> <!-- FT2233HPQ-->
-	<usb-device vendor-id="1027" product-id="24642" /> <!-- FT4232HPQ -->
-	<usb-device vendor-id="1027" product-id="24645" /> <!-- FT232HPQ -->
-	<usb-device vendor-id="1027" product-id="24644" /> <!-- FT233HPQ -->	
-</resources>
-```
-
 First config port using below method. (NOTE : You can config any of one port if you want to work for only 1 or 2 port)
 ```java
 PromptUtils.setPortZeroConfigData(int baudRate, int dataBit, int stopBit, int parity, boolean flowControl, int tareChar);
