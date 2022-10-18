@@ -107,7 +107,7 @@ public class PromptUtils {
                     for (int i = 0; i < numBytes; i++) {
                         UartServicePortThree.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
                     }
-                    sendData(numBytes, UartServicePortThree.writeBuffer);
+                    UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
 
                     if (!mReceivedDataPortThree.hasActiveObservers()) {
                         mReceivedDataPortThree.observe(mContext, s -> {
@@ -127,7 +127,7 @@ public class PromptUtils {
                     for (int i = 0; i < numBytes; i++) {
                         UartServicePortZero.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
                     }
-                    sendData(numBytes, UartServicePortZero.writeBuffer);
+                    UartServicePortZero.sendData(numBytes, UartServicePortZero.writeBuffer);
 
                     if (!mReceivedDataPortZero.hasActiveObservers()) {
                         mReceivedDataPortZero.observe(mContext, s -> {
@@ -147,7 +147,7 @@ public class PromptUtils {
                     for (int i = 0; i < numBytes; i++) {
                         UartServicePortOne.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
                     }
-                    sendData(numBytes, UartServicePortOne.writeBuffer);
+                    UartServicePortOne.sendData(numBytes, UartServicePortOne.writeBuffer);
 
                     if (!mReceivedDataPortOne.hasActiveObservers()) {
                         mReceivedDataPortOne.observe(mContext, s -> {
@@ -167,7 +167,7 @@ public class PromptUtils {
                     for (int i = 0; i < numBytes; i++) {
                         UartServicePortTwo.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
                     }
-                    sendData(numBytes, UartServicePortTwo.writeBuffer);
+                    UartServicePortTwo.sendData(numBytes, UartServicePortTwo.writeBuffer);
 
                     if (!mReceivedDataPortTwo.hasActiveObservers()) {
                         mReceivedDataPortTwo.observe(mContext, s -> {
