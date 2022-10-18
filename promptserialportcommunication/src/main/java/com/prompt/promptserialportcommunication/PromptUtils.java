@@ -13,6 +13,7 @@ import com.prompt.promptserialportcommunication.service.UartServicePortThree;
 import com.prompt.promptserialportcommunication.service.UartServicePortTwo;
 import com.prompt.promptserialportcommunication.service.UartServicePortZero;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PromptUtils {
@@ -99,7 +100,43 @@ public class PromptUtils {
         mActivity.stopService(serviceIntentThree);
     }
 
-    public static void sendDataToPrinter(AppCompatActivity mContext, List<String> mainString) {
+    public void writeDataOnSerial(String writeText, int noOfBlankLine) {
+
+        printedArrays = 0;
+
+        int numBytes = writeText.length();
+
+        DLog.e("TOTAL CHAR === ", numBytes + "");
+
+        List<String> mainString = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        int counter = 0;
+
+        String[] stringArray = writeText.split("\n");
+        for (int i = 0; i < stringArray.length; i++) {
+            /*counter++;
+            stringBuilder.append(stringArray[i]).append("\n");
+            mainString.add(stringBuilder.toString());
+            if (counter == 1 || stringArray.length == i + 1) {
+                mainString.add(stringBuilder.toString());
+                stringBuilder.delete(0, stringBuilder.length());
+                counter = 0;
+            }*/
+            mainString.add(stringArray[i] + "\n");
+        }
+
+        for (int index = 0; index <= noOfBlankLine; index++) {
+            stringBuilder.append("\n");
+        }
+
+        mainString.add(stringBuilder.toString());
+
+        sendDataToPrinter(mainString);
+    }
+
+    public static void sendDataToPrinter(List<String> mainString) {
         switch (printerPortIndex) {
             case 3:
                 if (UartServicePortThree.writeBuffer != null) {
@@ -108,16 +145,11 @@ public class PromptUtils {
                         UartServicePortThree.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
                     }
                     UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
-
-                    if (!mReceivedDataPortThree.hasActiveObservers()) {
-                        mReceivedDataPortThree.observe(mContext, s -> {
-                            printedArrays++;
-                            if (mainString.size() > printedArrays) {
-                                sendDataToPrinter(mContext, mainString);
-                            } else {
-                                printedArrays = 0;
-                            }
-                        });
+                    printedArrays++;
+                    if (mainString.size() > printedArrays) {
+                        sendDataToPrinter(mainString);
+                    } else {
+                        printedArrays = 0;
                     }
                 }
                 break;
@@ -128,16 +160,11 @@ public class PromptUtils {
                         UartServicePortZero.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
                     }
                     UartServicePortZero.sendData(numBytes, UartServicePortZero.writeBuffer);
-
-                    if (!mReceivedDataPortZero.hasActiveObservers()) {
-                        mReceivedDataPortZero.observe(mContext, s -> {
-                            printedArrays++;
-                            if (mainString.size() > printedArrays) {
-                                sendDataToPrinter(mContext, mainString);
-                            } else {
-                                printedArrays = 0;
-                            }
-                        });
+                    printedArrays++;
+                    if (mainString.size() > printedArrays) {
+                        sendDataToPrinter(mainString);
+                    } else {
+                        printedArrays = 0;
                     }
                 }
                 break;
@@ -148,16 +175,11 @@ public class PromptUtils {
                         UartServicePortOne.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
                     }
                     UartServicePortOne.sendData(numBytes, UartServicePortOne.writeBuffer);
-
-                    if (!mReceivedDataPortOne.hasActiveObservers()) {
-                        mReceivedDataPortOne.observe(mContext, s -> {
-                            printedArrays++;
-                            if (mainString.size() > printedArrays) {
-                                sendDataToPrinter(mContext, mainString);
-                            } else {
-                                printedArrays = 0;
-                            }
-                        });
+                    printedArrays++;
+                    if (mainString.size() > printedArrays) {
+                        sendDataToPrinter(mainString);
+                    } else {
+                        printedArrays = 0;
                     }
                 }
                 break;
@@ -168,16 +190,11 @@ public class PromptUtils {
                         UartServicePortTwo.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
                     }
                     UartServicePortTwo.sendData(numBytes, UartServicePortTwo.writeBuffer);
-
-                    if (!mReceivedDataPortTwo.hasActiveObservers()) {
-                        mReceivedDataPortTwo.observe(mContext, s -> {
-                            printedArrays++;
-                            if (mainString.size() > printedArrays) {
-                                sendDataToPrinter(mContext, mainString);
-                            } else {
-                                printedArrays = 0;
-                            }
-                        });
+                    printedArrays++;
+                    if (mainString.size() > printedArrays) {
+                        sendDataToPrinter(mainString);
+                    } else {
+                        printedArrays = 0;
                     }
                 }
                 break;
