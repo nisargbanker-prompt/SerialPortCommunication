@@ -12,7 +12,7 @@ allprojects {
 ```
 ```gradle
 dependencies {
-    implementation 'com.github.nisargbanker-prompt:SerialPortCommunication:1.0.1'
+    implementation 'com.github.nisargbanker-prompt:SerialPortCommunication:1.0.2'
 }
 ```
 
