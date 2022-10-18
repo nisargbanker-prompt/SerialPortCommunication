@@ -100,7 +100,7 @@ public class PromptUtils {
         mActivity.stopService(serviceIntentThree);
     }
 
-    public void writeDataOnSerial(String writeText, int noOfBlankLine) {
+    public static void writeDataOnSerial(String writeText, int noOfBlankLine) {
 
         printedArrays = 0;
 
