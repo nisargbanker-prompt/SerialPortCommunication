@@ -4,8 +4,9 @@ import static com.prompt.promptserialportcommunication.service.UartServicePortZe
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.Gravity;
+import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 
 import com.prompt.promptserialportcommunication.service.UartServicePortOne;
@@ -139,63 +140,95 @@ public class PromptUtils {
     public static void sendDataToPrinter(List<String> mainString) {
         switch (printerPortIndex) {
             case 3:
-                if (UartServicePortThree.writeBuffer != null) {
-                    int numBytes = mainString.get(printedArrays).length();
-                    for (int i = 0; i < numBytes; i++) {
-                        UartServicePortThree.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
-                    }
-                    UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
-                    printedArrays++;
-                    if (mainString.size() > printedArrays) {
-                        sendDataToPrinter(mainString);
+                if (UartServicePortThree.ftDev != null) {
+                    if (true == UartServicePortThree.ftDev.isOpen()) {
+                        if (UartServicePortThree.writeBuffer != null) {
+                            int numBytes = mainString.get(printedArrays).length();
+                            for (int i = 0; i < numBytes; i++) {
+                                UartServicePortThree.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
+                            }
+                            UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
+                            printedArrays++;
+                            if (mainString.size() > printedArrays) {
+                                sendDataToPrinter(mainString);
+                            } else {
+                                printedArrays = 0;
+                            }
+                        } else {
+                            showErrorToast("Port 3 not Open", Toast.LENGTH_LONG);
+                        }
                     } else {
-                        printedArrays = 0;
+                        showErrorToast("Port 3 not Open", Toast.LENGTH_LONG);
                     }
                 }
                 break;
             case 0:
-                if (UartServicePortZero.writeBuffer != null) {
-                    int numBytes = mainString.get(printedArrays).length();
-                    for (int i = 0; i < numBytes; i++) {
-                        UartServicePortZero.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
-                    }
-                    UartServicePortZero.sendData(numBytes, UartServicePortZero.writeBuffer);
-                    printedArrays++;
-                    if (mainString.size() > printedArrays) {
-                        sendDataToPrinter(mainString);
+                if (UartServicePortZero.ftDev != null) {
+                    if (true == UartServicePortZero.ftDev.isOpen()) {
+                        if (UartServicePortZero.writeBuffer != null) {
+                            int numBytes = mainString.get(printedArrays).length();
+                            for (int i = 0; i < numBytes; i++) {
+                                UartServicePortZero.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
+                            }
+                            UartServicePortZero.sendData(numBytes, UartServicePortZero.writeBuffer);
+                            printedArrays++;
+                            if (mainString.size() > printedArrays) {
+                                sendDataToPrinter(mainString);
+                            } else {
+                                printedArrays = 0;
+                            }
+                        }
                     } else {
-                        printedArrays = 0;
+                        showErrorToast("Port 0 not Open", Toast.LENGTH_LONG);
                     }
+                } else {
+                    showErrorToast("Port 0 not Open", Toast.LENGTH_LONG);
                 }
                 break;
             case 1:
-                if (UartServicePortOne.writeBuffer != null) {
-                    int numBytes = mainString.get(printedArrays).length();
-                    for (int i = 0; i < numBytes; i++) {
-                        UartServicePortOne.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
-                    }
-                    UartServicePortOne.sendData(numBytes, UartServicePortOne.writeBuffer);
-                    printedArrays++;
-                    if (mainString.size() > printedArrays) {
-                        sendDataToPrinter(mainString);
+                if (UartServicePortOne.ftDev != null) {
+                    if (true == UartServicePortOne.ftDev.isOpen()) {
+                        if (UartServicePortOne.writeBuffer != null) {
+                            int numBytes = mainString.get(printedArrays).length();
+                            for (int i = 0; i < numBytes; i++) {
+                                UartServicePortOne.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
+                            }
+                            UartServicePortOne.sendData(numBytes, UartServicePortOne.writeBuffer);
+                            printedArrays++;
+                            if (mainString.size() > printedArrays) {
+                                sendDataToPrinter(mainString);
+                            } else {
+                                printedArrays = 0;
+                            }
+                        }
                     } else {
-                        printedArrays = 0;
+                        showErrorToast("Port 1 not Open", Toast.LENGTH_LONG);
                     }
+                } else {
+                    showErrorToast("Port 1 not Open", Toast.LENGTH_LONG);
                 }
                 break;
             case 2:
-                if (UartServicePortTwo.writeBuffer != null) {
-                    int numBytes = mainString.get(printedArrays).length();
-                    for (int i = 0; i < numBytes; i++) {
-                        UartServicePortTwo.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
-                    }
-                    UartServicePortTwo.sendData(numBytes, UartServicePortTwo.writeBuffer);
-                    printedArrays++;
-                    if (mainString.size() > printedArrays) {
-                        sendDataToPrinter(mainString);
+                if (UartServicePortTwo.ftDev != null) {
+                    if (true == UartServicePortTwo.ftDev.isOpen()) {
+                        if (UartServicePortTwo.writeBuffer != null) {
+                            int numBytes = mainString.get(printedArrays).length();
+                            for (int i = 0; i < numBytes; i++) {
+                                UartServicePortTwo.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
+                            }
+                            UartServicePortTwo.sendData(numBytes, UartServicePortTwo.writeBuffer);
+                            printedArrays++;
+                            if (mainString.size() > printedArrays) {
+                                sendDataToPrinter(mainString);
+                            } else {
+                                printedArrays = 0;
+                            }
+                        }
                     } else {
-                        printedArrays = 0;
+                        showErrorToast("Port 2 not Open", Toast.LENGTH_LONG);
                     }
+                } else {
+                    showErrorToast("Port 2 not Open", Toast.LENGTH_LONG);
                 }
                 break;
         }
@@ -205,85 +238,149 @@ public class PromptUtils {
 
     public static void sendDataToPortZero(String data) {
         int numBytes = data.length();
-        if (UartServicePortZero.writeBuffer != null) {
-            for (int i = 0; i < numBytes; i++) {
-                UartServicePortZero.writeBuffer[i] = (byte) (data.charAt(i));
+        if (UartServicePortZero.ftDev != null) {
+            if (true == UartServicePortZero.ftDev.isOpen()) {
+                if (UartServicePortZero.writeBuffer != null) {
+                    for (int i = 0; i < numBytes; i++) {
+                        UartServicePortZero.writeBuffer[i] = (byte) (data.charAt(i));
+                    }
+                    UartServicePortZero.sendData(numBytes, UartServicePortZero.writeBuffer);
+                }
+            } else {
+                showErrorToast("Port 0 not Open", Toast.LENGTH_LONG);
             }
-            UartServicePortZero.sendData(numBytes, UartServicePortZero.writeBuffer);
+        } else {
+            showErrorToast("Port 0 not Open", Toast.LENGTH_LONG);
         }
     }
 
     public static void sendDataToPortOne(String data) {
         int numBytes = data.length();
-        if (UartServicePortOne.writeBuffer != null) {
-            for (int i = 0; i < numBytes; i++) {
-                UartServicePortOne.writeBuffer[i] = (byte) (data.charAt(i));
+        if (UartServicePortOne.ftDev != null) {
+            if (true == UartServicePortOne.ftDev.isOpen()) {
+                if (UartServicePortOne.writeBuffer != null) {
+                    for (int i = 0; i < numBytes; i++) {
+                        UartServicePortOne.writeBuffer[i] = (byte) (data.charAt(i));
+                    }
+                    UartServicePortOne.sendData(numBytes, UartServicePortOne.writeBuffer);
+                }
+            } else {
+                showErrorToast("Port 1 not Open", Toast.LENGTH_LONG);
             }
-            UartServicePortOne.sendData(numBytes, UartServicePortOne.writeBuffer);
+        } else {
+            showErrorToast("Port 1 not Open", Toast.LENGTH_LONG);
         }
     }
 
     public static void sendDataToPortTwo(String data) {
         int numBytes = data.length();
-        if (UartServicePortTwo.writeBuffer != null) {
-            for (int i = 0; i < numBytes; i++) {
-                UartServicePortTwo.writeBuffer[i] = (byte) (data.charAt(i));
+        if (UartServicePortTwo.ftDev != null) {
+            if (true == UartServicePortTwo.ftDev.isOpen()) {
+                if (UartServicePortTwo.writeBuffer != null) {
+                    for (int i = 0; i < numBytes; i++) {
+                        UartServicePortTwo.writeBuffer[i] = (byte) (data.charAt(i));
+                    }
+                    UartServicePortTwo.sendData(numBytes, UartServicePortTwo.writeBuffer);
+                }
+            } else {
+                showErrorToast("Port 2 not Open", Toast.LENGTH_LONG);
             }
-            UartServicePortTwo.sendData(numBytes, UartServicePortTwo.writeBuffer);
+        } else {
+            showErrorToast("Port 2 not Open", Toast.LENGTH_LONG);
         }
     }
 
     public static void sendDataToPortThree(String data) {
         int numBytes = data.length();
-        if (UartServicePortThree.writeBuffer != null) {
-            for (int i = 0; i < numBytes; i++) {
-                UartServicePortThree.writeBuffer[i] = (byte) (data.charAt(i));
+        if (UartServicePortThree.ftDev != null) {
+            if (true == UartServicePortThree.ftDev.isOpen()) {
+                if (UartServicePortThree.writeBuffer != null) {
+                    for (int i = 0; i < numBytes; i++) {
+                        UartServicePortThree.writeBuffer[i] = (byte) (data.charAt(i));
+                    }
+                    UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
+                }
+            } else {
+                showErrorToast("Port 3 not Open", Toast.LENGTH_LONG);
             }
-            UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
+        } else {
+            showErrorToast("Port 3 not Open", Toast.LENGTH_LONG);
         }
     }
 
     public static void tarePortZero() {
-        if (UartServicePortZero.writeBuffer != null) {
-            String writeText = Character.toString((char) UartServicePortZero.tareChar);
-            int numBytes = writeText.length();
-            for (int i = 0; i < numBytes; i++) {
-                UartServicePortZero.writeBuffer[i] = (byte) (writeText.charAt(i));
+        if (UartServicePortZero.ftDev != null) {
+            if (true == UartServicePortZero.ftDev.isOpen()) {
+                if (UartServicePortZero.writeBuffer != null) {
+                    String writeText = Character.toString((char) UartServicePortZero.tareChar);
+                    int numBytes = writeText.length();
+                    for (int i = 0; i < numBytes; i++) {
+                        UartServicePortZero.writeBuffer[i] = (byte) (writeText.charAt(i));
+                    }
+                    sendData(numBytes, UartServicePortZero.writeBuffer);
+                }
+            } else {
+                showErrorToast("Port 0 not Open", Toast.LENGTH_LONG);
             }
-            sendData(numBytes, UartServicePortZero.writeBuffer);
+        } else {
+            showErrorToast("Port 0 not Open", Toast.LENGTH_LONG);
         }
     }
 
     public static void tarePortOne() {
-        if (UartServicePortOne.writeBuffer != null) {
-            String writeText = Character.toString((char) UartServicePortOne.tareChar);
-            int numBytes = writeText.length();
-            for (int i = 0; i < numBytes; i++) {
-                UartServicePortOne.writeBuffer[i] = (byte) (writeText.charAt(i));
+        if (UartServicePortOne.ftDev != null) {
+            if (true == UartServicePortOne.ftDev.isOpen()) {
+                if (UartServicePortOne.writeBuffer != null) {
+                    String writeText = Character.toString((char) UartServicePortOne.tareChar);
+                    int numBytes = writeText.length();
+                    for (int i = 0; i < numBytes; i++) {
+                        UartServicePortOne.writeBuffer[i] = (byte) (writeText.charAt(i));
+                    }
+                    UartServicePortOne.sendData(numBytes, UartServicePortOne.writeBuffer);
+                }
+            } else {
+                showErrorToast("Port 1 not Open", Toast.LENGTH_LONG);
             }
-            UartServicePortOne.sendData(numBytes, UartServicePortOne.writeBuffer);
+        } else {
+            showErrorToast("Port 1 not Open", Toast.LENGTH_LONG);
         }
     }
 
     public static void tarePortTwo() {
-        if (UartServicePortTwo.writeBuffer != null) {
-            String writeText = Character.toString((char) UartServicePortTwo.tareChar);
-            int numBytes = writeText.length();
-            for (int i = 0; i < numBytes; i++) {
-                UartServicePortTwo.writeBuffer[i] = (byte) (writeText.charAt(i));
+        if (UartServicePortTwo.ftDev != null) {
+            if (true == UartServicePortTwo.ftDev.isOpen()) {
+                if (UartServicePortTwo.writeBuffer != null) {
+                    String writeText = Character.toString((char) UartServicePortTwo.tareChar);
+                    int numBytes = writeText.length();
+                    for (int i = 0; i < numBytes; i++) {
+                        UartServicePortTwo.writeBuffer[i] = (byte) (writeText.charAt(i));
+                    }
+                    UartServicePortTwo.sendData(numBytes, UartServicePortTwo.writeBuffer);
+                }
+            } else {
+                showErrorToast("Port 2 not Open", Toast.LENGTH_LONG);
             }
-            UartServicePortTwo.sendData(numBytes, UartServicePortTwo.writeBuffer);
+        } else {
+            showErrorToast("Port 2 not Open", Toast.LENGTH_LONG);
         }
     }
 
     public static void tarePortThree() {
-        if (UartServicePortThree.writeBuffer != null) {
-            String writeText = Character.toString((char) UartServicePortThree.tareChar);
-            int numBytes = writeText.length();
-            for (int i = 0; i < numBytes; i++) {
-                UartServicePortThree.writeBuffer[i] = (byte) (writeText.charAt(i));
+        if (UartServicePortThree.ftDev != null) {
+            if (true == UartServicePortThree.ftDev.isOpen()) {
+                if (UartServicePortThree.writeBuffer != null) {
+                    String writeText = Character.toString((char) UartServicePortThree.tareChar);
+                    int numBytes = writeText.length();
+                    for (int i = 0; i < numBytes; i++) {
+                        UartServicePortThree.writeBuffer[i] = (byte) (writeText.charAt(i));
+                    }
+                    UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
+                }
+            } else {
+                showErrorToast("Port 3 not Open", Toast.LENGTH_LONG);
             }
-            UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
+        } else {
+            showErrorToast("Port 3 not Open", Toast.LENGTH_LONG);
         }
     }
 
@@ -292,6 +389,12 @@ public class PromptUtils {
         tarePortOne();
         tarePortTwo();
         tarePortThree();
+    }
+
+    public static void showErrorToast(String str, int showTime) {
+        Toast toast = Toast.makeText(mActivity, str, showTime);
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
     }
 
 }

@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import com.ftdi.j2xx.D2xxManager;
 import com.ftdi.j2xx.FT_Device;
 import com.prompt.promptserialportcommunication.DLog;
+import com.prompt.promptserialportcommunication.PromptUtils;
 
 /**
  * @author Nisarg Banker
@@ -553,16 +554,20 @@ public class UartServicePortZero extends Service {
     }
 
     public static void sendData(int numBytes, byte[] buffer) {
-        if (ftDev.isOpen() == false) {
-            midToast("Device not open!", Toast.LENGTH_SHORT);
-            return;
-        } else if (DeviceStatus.DEV_CONFIG != checkDevice()) {
-            midToast("Device not configured!", Toast.LENGTH_SHORT);
-            return;
-        }
+        if (ftDev != null) {
+            if (ftDev.isOpen() == false) {
+                midToast("Device not open!", Toast.LENGTH_SHORT);
+                return;
+            } else if (DeviceStatus.DEV_CONFIG != checkDevice()) {
+                midToast("Device not configured!", Toast.LENGTH_SHORT);
+                return;
+            }
 
-        if (numBytes > 0) {
-            ftDev.write(buffer, numBytes);
+            if (numBytes > 0) {
+                ftDev.write(buffer, numBytes);
+            }
+        } else {
+            PromptUtils.showErrorToast("Port 0 not Open", Toast.LENGTH_LONG);
         }
     }
 
