@@ -154,12 +154,12 @@ public class PromptUtils {
                             } else {
                                 printedArrays = 0;
                             }
-                        } else {
-                            showErrorToast("Port 3 not Open", Toast.LENGTH_LONG);
                         }
                     } else {
                         showErrorToast("Port 3 not Open", Toast.LENGTH_LONG);
                     }
+                } else {
+                    showErrorToast("Port 3 not Open", Toast.LENGTH_LONG);
                 }
                 break;
             case 0:
