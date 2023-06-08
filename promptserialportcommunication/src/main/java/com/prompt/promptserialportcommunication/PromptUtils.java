@@ -16,6 +16,8 @@ import com.prompt.promptserialportcommunication.service.UartServicePortZero;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class PromptUtils {
 
@@ -143,11 +145,18 @@ public class PromptUtils {
                 if (UartServicePortThree.ftDev != null) {
                     if (true == UartServicePortThree.ftDev.isOpen()) {
                         if (UartServicePortThree.writeBuffer != null) {
+                            //UartServicePortThree.writeBuffer = new byte[12800];
                             int numBytes = mainString.get(printedArrays).length();
                             for (int i = 0; i < numBytes; i++) {
                                 UartServicePortThree.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
                             }
-                            UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
+                            new Timer().schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                    UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
+                                }
+                            }, 200);
+                            //UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
                             printedArrays++;
                             if (mainString.size() > printedArrays) {
                                 sendDataToPrinter(mainString);
