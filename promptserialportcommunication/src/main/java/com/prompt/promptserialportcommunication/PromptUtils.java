@@ -150,16 +150,15 @@ public class PromptUtils {
                             for (int i = 0; i < numBytes; i++) {
                                 UartServicePortThree.writeBuffer[i] = (byte) (mainString.get(printedArrays).charAt(i));
                             }
-                            new Timer().schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
-                                }
-                            }, 200);
-                            //UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
+                            UartServicePortThree.sendData(numBytes, UartServicePortThree.writeBuffer);
                             printedArrays++;
                             if (mainString.size() > printedArrays) {
-                                sendDataToPrinter(mainString);
+                                new Timer().schedule(new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        sendDataToPrinter(mainString);
+                                    }
+                                }, 200);
                             } else {
                                 printedArrays = 0;
                             }
