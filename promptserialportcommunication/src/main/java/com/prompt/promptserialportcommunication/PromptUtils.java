@@ -400,9 +400,11 @@ public class PromptUtils {
     }
 
     public static void showErrorToast(String str, int showTime) {
-        Toast toast = Toast.makeText(mActivity, str, showTime);
-        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
-        toast.show();
+        if (BuildConfig.DEBUG) {
+            /*Toast toast = Toast.makeText(mActivity, str, showTime);
+            toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();*/
+        }
     }
 
 }

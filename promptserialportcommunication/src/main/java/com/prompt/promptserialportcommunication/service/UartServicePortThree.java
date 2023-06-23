@@ -243,14 +243,14 @@ public class UartServicePortThree extends Service {
     // call this API to show message
     static void midToast(String str, int showTime) {
         if (DLog.LOG) {
-            Toast toast = Toast.makeText(global_context, str, showTime);
+            /*Toast toast = Toast.makeText(global_context, str, showTime);
             toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
 
             TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
             v.setTextColor(Color.YELLOW);
             View toastView = toast.getView();
             toastView.setBackgroundColor(Color.GRAY);
-            toast.show();
+            toast.show();*/
         }
     }
 
